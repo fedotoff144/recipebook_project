@@ -1,0 +1,87 @@
+{% extends 'recipebook/base.html' %}
+{% load static %}
+
+{% block title %}Редакитровать {{ recipe.recipe_name }}{% endblock %}
+{##}
+{#{% block content %}#}
+{#<h1>Редактировать рецепт</h1>#}
+{#<form method="post" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <button type="submit">Сохранить изменения</button>#}
+{#</form>#}
+{#{% endblock %}#}
+
+
+{% block content %}
+    <main class="common">
+    
+        <section class="outer-block">
+            <h1>Редактор рецепта</h1>
+            
+{#            {% if recipe.image %}#}
+                <div class="rectangle-img-big"><img src="{{ recipe.image.url }}" alt="user photo"></div>
+{#            {% else %}#}
+{#                <div class="around-img"><img src="{% static 'images/default_recipe.jpg' %}" alt="photo"></div>#}
+{#            {% endif %} #}
+
+            <form class="add-recipe-form" method="post" enctype="multipart/form-data">
+                <br>
+                {% csrf_token %}
+                {{ form.recipe_name }}
+                
+                <div class="recipe-main-info">
+                    <div>
+                        {{ form.servings.label_tag }}<br>
+                        {{ form.servings }}
+                    </div>
+                    <div>
+                        {{ form.time.label_tag }}<br>
+                        {{ form.time }} (минут)
+                    </div>
+                </div>
+                
+                <div class="description-field">
+                    <p>
+                        Опишите ваш рецепт для будущих читателей. 
+                        Это позволит им лучше понять процесс приготовления и вдохновит на приготовление вашего блюда.
+                    </p>
+                    {{ form.description }}
+                </div>
+                
+                <div class="description-field">
+                    <p>
+                        Укажите ингридиенты, которые необходимы для приготовления и подачи данного
+                        блюда. Каждый новый ингридиент указывайте с новой строки, а его порцию указывайте через двоеточие ":".
+                        <br>
+                        <i><b>ПРИМЕР:</b></i> мука: 400гр.
+                    </p>
+                    {{ form.ingredients }}
+                </div>
+                
+                <div class="description-field">
+                    <p>
+                        Пошаговая иструкция поможет начинающим приготовить ваш рецепт.
+                        Мы рекомендуем
+                        разбивать рецепт минимум на 5 шагов. Каждый шаг указывайте с новой строки.
+                    </p>
+                    {{ form.cooking_steps }}
+                </div>
+                
+                <div class="recipe-main-info choice">
+                                        
+                    <label for="categories">Выберите категорию рецепта </label>
+                    {{ form.category }}
+                </div>
+                
+                <div class="recipe-main-info add-recipe-image">
+                    <label for="recipe-image">Изображение рецепта</label>
+                    {{ form.image }}
+                </div>
+                <input class="post send-button" type="submit" value="Сохранить изменения">
+            </form>
+            
+        </section>
+    
+    </main>
+{% endblock %}

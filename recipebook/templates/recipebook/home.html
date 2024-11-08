@@ -1,0 +1,89 @@
+{% extends 'recipebook/base.html' %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    <main class="common flex-direct-col">
+        <section class="outer-block-slim">
+            {% if user.username %}
+            	<h1>{{ user.username }}, добро пожаловать на сайт рецептов</h1>
+            {% endif %} 
+            <div class="top">
+                <p>
+                    <span class="marker">Имбирный домик</span><br>
+                    Кулинарный проект, в котором <br>
+                    мы делимся с вами пошаговыми <br>
+                    рецептами с авторскими <br> фотографиями.
+                </p>
+            </div>
+            <h1>Лучшие рецепты</h1>
+
+            {% for recipe in recipes %}
+                <a href="{% url 'recipebook:recipe_detail' pk=recipe.pk %}">
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="preview-of-recipe">
+                            <div class="around-img">
+{#                                {% if recipe.image %}#}
+                                    <img src="{{ recipe.image.url }}" alt="{{ recipe.recipe_name }}">
+{#                                {% else %}#}
+{#                                    <img src="{% static 'images/private_area.png' %}" alt="donut">#}
+{#                                {% endif %}#}
+                            </div>
+                            <p>
+                                <span>{{ recipe.recipe_name }}</span><br>
+                                {{ recipe.description }}
+                            </p>
+                        </div>
+                    {% else %}
+                        <div class="preview-of-recipe reverse">
+                            <div class="around-img">
+                                {% if recipe.image %}
+                                    <img src="{{ recipe.image.url }}" alt="{{ recipe.recipe_name }}">
+                                {% else %}
+                                    <img src="{% static 'images/private_area.png' %}" alt="donut">
+                                {% endif %}
+                            </div>
+                            <p>
+                                <span>{{ recipe.recipe_name }}</span><br>
+                                {{ recipe.description }}
+                            </p>
+                        </div>
+                    {% endif %} 
+                </a>
+                
+            {% endfor %}
+        </section>
+    
+        <section class="social-media">
+            <h2>Присоединяйтесь к нам в социальных сетях</h2>
+            <div class="icons">
+                <a href="https://vk.com">
+                    <div class="unit">
+                        <img src="{% static 'images/vk.png' %}" alt="vk">
+                        <span>ВКОНТАКТЕ</span>
+                    </div>
+                </a>
+                <a href="https://instagram.com">
+                    <div class="unit">
+                        <img src="{% static 'images/instagram.png' %}" alt="instagram">
+                        <span>INSTAGRAM</span>
+                    </div>
+                </a>
+                <a href="https://web.telegram.org/k/">
+                    <div class="unit">
+                        <img src="{% static 'images/telegram.png' %}" alt="telegram">
+                        <span>TELEGRAM</span>
+                    </div>
+                </a>
+                <a href="https://web.whatsapp.com/">
+                    <div class="unit">
+                        <img src="{% static 'images/whatsapp.png' %}" alt="whatsapp">
+                        <span>WHATSAPP</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    
+    </main>
+{% endblock %}

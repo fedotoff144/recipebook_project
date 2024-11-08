@@ -1,0 +1,40 @@
+{% extends 'recipebook/base.html' %}
+{% load static %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+    <main class="common">
+    
+        <section class="outer-block min-height">
+        
+                <h1>Личный кабинет {{ user.username }}</h1>
+        
+                <div class="personal-area">
+                    {% if user.image %}
+                        <div class="around-img"><img src="{{ user.image.url }}" alt="user photo"></div>
+                    {% else %}
+                        <div class="around-img"><img src="{% static 'images/user_photo.jpeg' %}" alt="photo"></div>
+                    {% endif %} 
+                
+                    <form class="form-pa" method="post" action="{% url 'recipebook:profile' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input class="login indentation" type="submit" value="Сохранить">
+                    </form>
+                </div>
+
+                <div class="add-recipe-button">
+                    <img src="{% static 'images/plus.png' %}" alt="plus">
+                    <a href="{% url 'recipebook:add_recipe' %}">
+                        <div>ДОБАВИТЬ <br> РЕЦЕПТ</div>
+                    </a>
+                </div>
+
+                <img class="fix-img-footer" src="{% static 'images/cookies_footer.png' %}"
+                     alt="cookies">
+        
+            </section>
+
+    </main>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'recipebook/base.html' %}
+{% load static %}
+
+{% block title %}{{ recipe.recipe_name }}{% endblock %}
+
+{% block content %}
+<main class="common">
+    <div class="outer-block-recipe">
+        <h1 class="common headline-recipe">{{ recipe.recipe_name }}</h1>
+
+        <section class="description">
+
+            <div class="text">
+                <h2>Автор: {{ recipe.user.username }}</h2>
+                <div class="description-title">
+                    <img src="{% static 'images/ingredients.png' %}" alt="ingredients">
+                    <h3>{{ ingredients | length }} ингредиентов</h3>
+                    <img src="{% static 'images/dish.png' %}" alt="dish">
+                    <h3>{{ recipe.servings }} порций</h3>
+                    <img src="{% static 'images/clock.png' %}" alt="clock">
+                    <h3>{{ recipe.time }} мин</h3>
+                </div>
+                <p>
+                    {{ recipe.description }}
+                </p>
+            </div>
+            
+{#            {% if recipe.image %}#}
+                <div class="around-img"><img src="{{ recipe.image.url }}" alt="recipe"></div>
+{#            {% else %}#}
+{#                <div class="around-img"><img src="{% static 'images/default_recipe.jpg' %}" alt="recipe"></div>#}
+{#            {% endif %} #}
+
+            <div class="ingredients">
+                <h2>Ингридиенты:</h2>
+                <table>
+                    {% for key, value in ingredients.items %}
+                        <tr>
+                            <td>{{ key }}</td><td>{{ value }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <img class="fix-img" src="{% static 'images/mixer.png' %}" alt="mixer">
+
+        </section>
+    
+        <section class="steps">
+            {% for step in steps %}
+                <div>Шаг {{ forloop.counter }}<br>{{ step }} </div>
+            {% endfor %}
+        </section>
+        {% if user.is_authenticated %}
+            <div class="add-recipe-button">
+                <a href="{% url 'recipebook:edit_recipe' recipe.pk %}">Редактировать рецепт</a>
+            </div>
+        {% endif %} 
+    </div>
+</main>
+{% endblock %}

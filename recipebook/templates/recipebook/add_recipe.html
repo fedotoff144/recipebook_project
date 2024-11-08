@@ -1,0 +1,70 @@
+{% extends 'recipebook/base.html' %}
+{% load static %}
+
+{% block title %}Добавить рецепт{% endblock %}
+
+{% block content %}
+    <main class="common">
+    
+        <section class="outer-block">
+            <h1>Ваш новый рецепт</h1>
+
+            <form class="add-recipe-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.recipe_name }}
+                
+                <div class="recipe-main-info">
+                    <div>
+                        {{ form.servings.label_tag }}<br>
+                        {{ form.servings }}
+                    </div>
+                    <div>
+                        {{ form.time.label_tag }}<br>
+                        {{ form.time }} (минут)
+                    </div>
+                </div>
+                
+                <div class="description-field">
+                    <p>
+                        Опишите ваш рецепт для будущих читателей. 
+                        Это позволит им лучше понять процесс приготовления и вдохновит на приготовление вашего блюда.
+                    </p>
+                    {{ form.description }}
+                </div>
+                
+                <div class="description-field">
+                    <p>
+                        Укажите ингридиенты, которые необходимы для приготовления и подачи данного
+                        блюда. Каждый новый ингридиент указывайте с новой строки, а его порцию указывайте через двоеточие ":".
+                        <br>
+                        <i><b>ПРИМЕР:</b></i> мука: 400гр.
+                    </p>
+                    {{ form.ingredients }}
+                </div>
+                
+                <div class="description-field">
+                    <p>
+                        Пошаговая иструкция поможет начинающим приготовить ваш рецепт.
+                        Мы рекомендуем
+                        разбивать рецепт минимум на 5 шагов. Каждый шаг указывайте с новой строки.
+                    </p>
+                    {{ form.cooking_steps }}
+                </div>
+                
+                <div class="recipe-main-info choice">
+                                        
+                    <label for="categories">Выберите категорию рецепта </label>
+                    {{ form.category }}
+                </div>
+                
+                <div class="recipe-main-info add-recipe-image">
+                    <label for="recipe-image">Изображение рецепта</label>
+                    {{ form.image }}
+                </div>
+                <input class="post send-button" type="submit" value="Добавить рецепт">
+            </form>
+            
+        </section>
+    
+    </main>
+{% endblock %}

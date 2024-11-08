@@ -1,0 +1,50 @@
+{% extends 'recipebook/base.html' %}
+{% load static %}
+
+{% block title %}Категории рецептов{% endblock %}
+
+{% block content %}
+    <main class="common">
+        <section class="outer-block">
+            <h1>Рецепты</h1>
+
+            <div class="categories-preview">
+                <div class="categories-row">
+                    <a href="{% url 'recipebook:recipes_category' category=1 %}">
+                        <div class="categories">
+                            <img src="{% static 'images/cakes.png' %}" alt="cakes">
+                            <h4>Торты</h4>
+                        </div>
+                    </a>
+                    <a href="{% url 'recipebook:recipes_category' category=2 %}">
+                        <div class="categories">
+                            <img src="{% static 'images/pies.png' %}" alt="pies">
+                            <h4>Пироги</h4>
+                        </div>
+                    </a>
+                    <a href="{% url 'recipebook:recipes_category' category=3 %}">
+                        <div class="categories">
+                            <img src="{% static 'images/cookies.png' %}" alt="cookies">
+                            <h4>Печенье</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="categories-row">
+                    <a href="{% url 'recipebook:recipes_category' category=4 %}">
+                        <div class="categories">
+                            <img src="{% static 'images/capcakes.png' %}" alt="capcakes">
+                            <h4>Капкейки</h4>
+                        </div>
+                    </a>
+                    <a href="{% url 'recipebook:recipes_category' category=5 %}">
+                        <div class="categories">
+                            <img src="{% static 'images/not_sweet_bakes.png' %}" alt="not_sweet_bakes">
+                            <h4>Несладкая выпечка</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+{% endblock %}

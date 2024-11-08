@@ -1,0 +1,61 @@
+{% extends 'recipebook/base.html' %}
+{% load static %}
+
+{% block title %}Категория {{ category_name }}{% endblock %}
+
+{% block content %}
+    <main class="common">
+        <div class="outer-block-recipe">
+            <div class="center-right">
+                <h1 class="common headline-recipe">{{ category_name }}</h1>
+                <a href="{% url 'recipebook:add_recipe' %}">
+                    <div class="add-recipe">
+                    <img src="{% static 'images/plus.png' %}" alt="plus button">
+                    добавить рецепт
+                    </div>
+                </a>
+            </div>
+
+            <section class="page">
+            
+                {% for recipe in recipes %}
+                    
+                    <a href="{% url 'recipebook:recipe_detail' pk=recipe.pk %}">
+                        <div class="block-unit">
+                            <div class="rectangle-img">
+{#                                {% if recipe.image %}#}
+                                    <img src="{{ recipe.image.url }}" alt="{{ recipe.recipe_name }}">
+{#                                {% else %}#}
+{#                                    <img src="{% static 'images/private_area.png' %}" alt="{{ recipe.recipe_name }}">#}
+{#                                {% endif %}#}
+                            </div>
+        
+                            <div class="block-unit-info">
+                                <h2>{{ recipe.recipe_name }}</h2>
+                                Автор: {{ recipe.user.username }}
+                                <div class="description-title">
+                                    <img src="{% static 'images/ingredients.png' %}" alt="ingredients">
+{#                                    make counter of ingredients#}
+                                    10 ингредиентов
+                                    <img src="{% static 'images/dish.png' %}" alt="dish">
+                                    {{ recipe.servings }} порций
+                                    <img src="{% static 'images/clock.png' %}" alt="image">
+                                    {{ recipe.time }} мин
+                                </div>
+                                <div class="reaction">
+                                    <img src="{% static 'images/watching.png' %}" alt="watching">
+                                    1987
+                                    <img src="{% static 'images/likes.png' %}" alt="likes">
+                                    3100
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                {% endfor %}
+
+            </section>
+
+        </div>
+    </main>
+{% endblock %}

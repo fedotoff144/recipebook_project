@@ -1,0 +1,59 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <title>{% block title %}Книга рецептов{% endblock %}</title>
+</head>
+<body>
+<header>
+    <div class="menu">
+        <div><a href="{% url 'recipebook:recipes_category' category=1 %}">Торты</a></div>
+        <div><a href="{% url 'recipebook:recipes_category' category=2 %}">Пироги</a></div>
+        <div><a href="{% url 'recipebook:recipes_category' category=3 %}">Печенье</a></div>
+        <div><a href="{% url 'recipebook:recipes_category' category=4 %}">Капкейки</a></div>
+        <div><a href="{% url 'recipebook:recipes_category' category=5 %}">Несладкая выпечка</a></div>
+        <div><a href="{% url 'recipebook:home' %}">Главная</a></div>
+    </div>
+    <div class="login">
+    {% if user.is_authenticated %}
+        <div class="login-active">
+            <a class="icon-profile" href="{% url 'recipebook:profile' %}">
+                <img src="{% static 'images/icon_profile.svg' %}" alt="profile-icon">
+            </a>
+            <a href="{% url 'recipebook:user_logout' %}">Выход</a>
+        </div>
+    {% else %}
+        <a href="{% url 'recipebook:user_login' %}">
+            <div>Вход <br> Регистрация</div>
+        </a>
+    {% endif %}
+    </div>
+</header>
+
+{% block content %}
+    <h1>Soon here will be content. Please wait a minute</h1>
+{% endblock %}
+
+<footer>
+    <div><a href="{% url 'recipebook:home' %}">Главная</a></div>
+    <div><a href="{% url 'recipebook:help_template' %}">Помощь</a></div>
+    <div><a href="#">Контакты</a></div>
+    <div class="extended">
+        Почта: <br>
+        imbirnyyd@mail.ru <br>
+        Телефон: <br>
+        8 (49232)1 -23-45
+    </div>
+    <div><a href="{% url 'recipebook:categories' %}">Категории рецептов</a></div>
+    <div><a href="{% url 'recipebook:advertisement' %}">Рекламодателям</a></div>
+    <div><a href="{% url 'recipebook:rules' %}">Правила</a></div>
+</footer>
+</body>
+</html>
