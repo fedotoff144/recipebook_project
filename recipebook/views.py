@@ -1,4 +1,6 @@
 import random
+from logging import exception
+
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, logout
@@ -31,10 +33,16 @@ def rules(request):
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     ingredients_raw = recipe.ingredients.replace('\r', '').split('\n')
-    ingredients = dict(map(lambda x: x.split(':'), ingredients_raw))
+    try:
+        ingredients = dict(map(lambda x: x.split(':'), ingredients_raw))
+        marker = True
+    except ValueError as e:
+        print(e)
+        ingredients = recipe.ingredients
+        marker = False
     steps = recipe.cooking_steps.replace('\r', '').split('\n')
     return render(request, 'recipebook/recipe_detail.html',
-                  {'recipe': recipe, 'ingredients': ingredients, 'steps': steps})
+                  {'recipe': recipe, 'ingredients': ingredients, 'steps': steps, 'marker': marker})
 
 
 def categories_preview(request):
