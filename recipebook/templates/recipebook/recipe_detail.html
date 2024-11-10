@@ -33,13 +33,24 @@
 
             <div class="ingredients">
                 <h2>Ингридиенты:</h2>
-                <table>
-                    {% for key, value in ingredients.items %}
-                        <tr>
-                            <td>{{ key }}</td><td>{{ value }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                {% if marker %}
+                    <table>
+                        {% for key, value in ingredients.items %}
+                            <tr>
+                                <td>{{ key }}</td><td>{{ value }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    {{ ingredients }}
+                    <h6 class="warn">Пожалуйста, убедитесь, что каждый ингредиент перечислен с новой строки, а между 
+                        наименованием ингредиента и его количеством стоит знак ":". 
+                        Это повысит комфорт чтения рецепта. Пример оформления ингредиентов ниже:
+                        <br> Мука: 250 г 
+                        <br> Сахар: 200 г
+                        <br>Сливочное масло: 150 г 
+                    </h6>
+                {% endif %} 
             </div>
 
             <img class="fix-img" src="{% static 'images/mixer.png' %}" alt="mixer">
