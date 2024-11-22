@@ -14,12 +14,12 @@
 <body>
 <header>
     <div class="menu">
+        <div><a href="{% url 'recipebook:home' %}">Главная</a></div>
         <div><a href="{% url 'recipebook:recipes_category' category=1 %}">Торты</a></div>
         <div><a href="{% url 'recipebook:recipes_category' category=2 %}">Пироги</a></div>
         <div><a href="{% url 'recipebook:recipes_category' category=3 %}">Печенье</a></div>
         <div><a href="{% url 'recipebook:recipes_category' category=4 %}">Капкейки</a></div>
         <div><a href="{% url 'recipebook:recipes_category' category=5 %}">Несладкая выпечка</a></div>
-        <div><a href="{% url 'recipebook:home' %}">Главная</a></div>
     </div>
     <div class="login">
     {% if user.is_authenticated %}
